@@ -90,7 +90,7 @@ void MinidumpDescriptor::UpdatePath() {
   }
 
   path_.clear();
-  path_ = directory_ + "/" + guid_str + ".dmp";
+  path_ = directory_ ;//+ "/" + guid_str + ".dmp";
   c_path_ = path_.c_str();
 }
 

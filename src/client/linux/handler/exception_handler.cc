@@ -86,6 +86,8 @@
 #include <utility>
 #include <vector>
 
+#include <iostream>
+
 #include "common/basictypes.h"
 #include "common/linux/breakpad_getcontext.h"
 #include "common/linux/linux_libc_support.h"
@@ -326,7 +328,7 @@ void ExceptionHandler::RestoreHandlersLocked() {
 // Runs on the crashing thread.
 // static
 void ExceptionHandler::SignalHandler(int sig, siginfo_t* info, void* uc) {
-
+  std::cerr << "[SignalHandler]catch signal: " << sig << std::endl;
   // Give the first chance handler a chance to recover from this signal
   //
   // This is primarily used by V8. V8 uses guard regions to guarantee memory
@@ -386,7 +388,7 @@ void ExceptionHandler::SignalHandler(int sig, siginfo_t* info, void* uc) {
   } else {
     RestoreHandlersLocked();
   }
-
+    RestoreHandlersLocked();
   pthread_mutex_unlock(&g_handler_stack_mutex_);
 
   // info->si_code <= 0 iff SI_FROMUSER (SI_FROMKERNEL otherwise).
